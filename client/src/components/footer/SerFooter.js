@@ -1,7 +1,11 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Footer = () => {
+          const [open, setOpen] = useState(false);
+    
     return (
         <footer style={{
             backgroundColor: "#385aab",
@@ -30,18 +34,16 @@ const Footer = () => {
                 <div>
                     <h4 style={{ marginBottom: "1.5rem", fontSize: "1.1rem", fontWeight: "600" }}>Platform</h4>
                     <ul style={{ listStyle: "none", padding: 0 }}>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="#" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Store Catalog</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="#" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Service Booking</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="#" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Order Tracking</a></li>
+                       <Link to="/service-technician/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }} onClick={() => setOpen(false)}>Home</Link><br/>
+                       <Link to="/service-work-status" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }} onClick={() => setOpen(false)}>Work Status</Link>
                     </ul>
                 </div>
 
                 <div>
                     <h4 style={{ marginBottom: "1.5rem", fontSize: "1.1rem", fontWeight: "600" }}>Support</h4>
                     <ul style={{ listStyle: "none", padding: 0 }}>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="#" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Help Center</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="#" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Privacy Policy</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="#" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Technician Login</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/service-technician/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Help Center</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/service-technician/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Privacy Policy</a></li>
                     </ul>
                 </div>
 

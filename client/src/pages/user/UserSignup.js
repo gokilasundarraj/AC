@@ -39,7 +39,7 @@ const UserSignup = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(
+      await axios.post(
         "https://ac-klmv.onrender.com/api/auth/register",
         formData
       );

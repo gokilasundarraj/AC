@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ProductDeliverymanNav from "../../components/navbar/productDeliverymanNav";
 import API from "../../api/axios";
 import Loader from "../../components/Loader";
 import ProFooter from "../../components/footer/ProFooter"
 
 const ProductPending = () => {
-  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [verifyingOrderId, setVerifyingOrderId] = useState(null);

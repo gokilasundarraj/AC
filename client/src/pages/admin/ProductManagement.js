@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import AdminNav from "../../components/navbar/AdminNav";
 import AdminFooter from "../../components/footer/AdminFooter"
 
 const ProductManagement = () => {
-  const navigate = useNavigate();
+ 
   const [products, setProducts] = useState([]);
 
   const [form, setForm] = useState({

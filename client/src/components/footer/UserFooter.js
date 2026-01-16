@@ -2,9 +2,10 @@ import React from "react";
 import logo from "../../assets/logo.png";
 
 const Footer = () => {
+    
     return (
         <footer style={{
-            backgroundColor: "#3c5883",
+            backgroundColor: "var(--primary)",
             color: "var(--white)",
             padding: "4rem 2rem 2rem 2rem",
             marginTop: "auto"
@@ -30,19 +31,19 @@ const Footer = () => {
                 <div>
                     <h4 style={{ marginBottom: "1.5rem", fontSize: "1.1rem", fontWeight: "600" }}>Platform</h4>
                     <ul style={{ listStyle: "none", padding: 0 }}>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/admin/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Dashboard</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/product-management" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Product Management</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/service-management" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Service Management</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/admin/product-history" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Product History</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/admin/service-history" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Service History</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/user/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Home</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/cart" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Product Cart</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/service-cart" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Service Cart</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/product-history" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Product History</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/service-history" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Service History</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 style={{ marginBottom: "1.5rem", fontSize: "1.1rem", fontWeight: "600" }}>Support</h4>
                     <ul style={{ listStyle: "none", padding: 0 }}>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/admin/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Help Center</a></li>
-                        <li style={{ marginBottom: "0.75rem" }}><a href="/admin/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Privacy Policy</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/user/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Help Center</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/user/home" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Privacy Policy</a></li>
                     </ul>
                 </div>
 

@@ -1,10 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const Footer = () => {
-          const [open, setOpen] = useState(false);
     
     return (
         <footer style={{
@@ -34,10 +31,10 @@ const Footer = () => {
                 <div>
                     <h4 style={{ marginBottom: "1.5rem", fontSize: "1.1rem", fontWeight: "600" }}>Platform</h4>
                     <ul style={{ listStyle: "none", padding: 0 }}>
-                       <Link to="/user/signup" style={{color:"var(--white)", textDecoration:"none" , opacity:0.7,fontSize:"0.9rem"}} onClick={() => setOpen(false)}>User Signup</Link><br/>
-                        <Link to="/admin/login" style={{color:"var(--white)", textDecoration:"none" , opacity:0.7,fontSize:"0.9rem"}} onClick={() => setOpen(false)}>Admin Login</Link><br/>
-                        <Link to="/product-delivery/login" style={{color:"var(--white)", textDecoration:"none" , opacity:0.7,fontSize:"0.9rem"}} onClick={() => setOpen(false)}>Delivery Login</Link><br/>
-                        <Link to="/service-technician/login" style={{color:"var(--white)", textDecoration:"none" , opacity:0.7,fontSize:"0.9rem"}} onClick={() => setOpen(false)}>Technician Login</Link><br/>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/user/signup" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>User Signup</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/admin/login" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Admin Login</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/product-delivery/login" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Delivery Login</a></li>
+                        <li style={{ marginBottom: "0.75rem" }}><a href="/service-technician/login" style={{ color: "var(--white)", textDecoration: "none", opacity: 0.7, fontSize: "0.9rem" }}>Technician Login</a></li>
                     </ul>
                 </div>
 

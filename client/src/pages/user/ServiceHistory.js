@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import UserNav from "../../components/navbar/UserNav";
-import Footer from "../../components/footer/AdminFooter";
+import Footer from "../../components/footer/UserFooter";
 
 const ServiceHistory = () => {
   const [services, setServices] = useState([]);

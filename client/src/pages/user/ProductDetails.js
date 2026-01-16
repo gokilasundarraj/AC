@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import UserNav from "../../components/navbar/UserNav";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/footer/UserFooter";
 
 const ProductDetails = () => {
   const { id } = useParams();

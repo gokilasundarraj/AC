@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserNav from "../../components/navbar/UserNav";
 import API from "../../api/axios";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/footer/UserFooter";
 
 
 const UserHome = () => {

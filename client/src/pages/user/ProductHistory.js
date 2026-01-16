@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import UserNav from "../../components/navbar/UserNav";
 import API from "../../api/axios";
 import Loader from "../../components/Loader";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/footer/UserFooter";
 
 const ProductHistory = () => {
   const [orders, setOrders] = useState([]);

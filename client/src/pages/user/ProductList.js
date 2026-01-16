@@ -7,13 +7,13 @@ import Footer from "../../components/footer/Footer";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
-  const IMAGE_BASE_URL = "http://localhost:5000/uploads";
+  const IMAGE_BASE_URL = "https://ac-klmv.onrender.com/uploads";
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/products"
+          "https://ac-klmv.onrender.com/api/products"
         );
         setProducts(res.data);
       } catch (error) {

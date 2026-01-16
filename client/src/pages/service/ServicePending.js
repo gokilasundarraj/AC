@@ -12,7 +12,7 @@ const ServicePending = () => {
   useEffect(() => {
     const fetchPending = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/services/admin-history");
+        const res = await axios.get("https://ac-klmv.onrender.com/api/services/admin-history");
         const filtered = res.data.filter(
           (s) =>
             s.status?.toUpperCase() === "PENDING" ||
@@ -33,7 +33,7 @@ const ServicePending = () => {
     if (enteredOtp === systemOtp) {
       try {
        
-        await axios.put(`http://localhost:5000/api/services/${serviceId}/status`, {
+        await axios.put(`https://ac-klmv.onrender.com/services/${serviceId}/status`, {
           status: "COMPLETED",
         });
 

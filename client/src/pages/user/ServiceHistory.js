@@ -19,7 +19,7 @@ const ServiceHistory = () => {
     try {
       setLoading(true);
       
-      const res = await axios.get("http://localhost:5000/api/services/admin-history");
+      const res = await axios.get("https://ac-klmv.onrender.com/api/services/admin-history");
 
       const userServices = res.data.filter(s => s.user?._id === userId || s.user === userId);
 
@@ -94,7 +94,7 @@ const ServiceHistory = () => {
                     <div style={{ background: "#f8fafc", padding: "1rem", borderRadius: "8px", marginBottom: "1rem" }}>
                       {service.services?.map((item, i) => (
                         <div key={i} style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                          <span>🔧 {item.name}</span>
+                          <span>{item.name}</span>
                           <span style={{ fontWeight: "700" }}>₹ {item.price}</span>
                         </div>
                       ))}

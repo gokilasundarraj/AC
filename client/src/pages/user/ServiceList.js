@@ -11,7 +11,7 @@ const ServiceList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/services")
+      .get("https://ac-klmv.onrender.com/api/services")
       .then((res) => setServices(res.data));
   }, []);
 
@@ -31,7 +31,7 @@ const ServiceList = () => {
             >
               <img
                 className="card-img"
-                src={`http://localhost:5000/uploads/${s.image}`}
+                src={`https://ac-klmv.onrender.com/uploads/${s.image}`}
                 alt={s.name}
                 style={{ height: "200px" }}
               />

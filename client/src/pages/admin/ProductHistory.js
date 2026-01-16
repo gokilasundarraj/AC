@@ -13,7 +13,7 @@ const ProductHistory = () => {
   const fetchProductOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/orders");
+      const res = await axios.get("https://ac-klmv.onrender.com/api/orders");
       setOrders(res.data);
     } catch (err) {
       console.error(err);

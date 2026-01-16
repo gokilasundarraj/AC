@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../api/axios";
 import AdminNav from "../../components/navbar/AdminNav";
-
+import AdminFooter from "../../components/footer/AdminFooter"
 const UserDetails = () => {
   const { name } = useParams();
 
@@ -110,6 +110,7 @@ const UserDetails = () => {
           ))
         )}
       </div>
+      <AdminFooter/>
     </div>
   );
 };

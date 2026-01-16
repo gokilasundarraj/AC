@@ -40,7 +40,7 @@ const UserSignup = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://ac-klmv.onrender.com/api/auth/register",
         formData
       );
 

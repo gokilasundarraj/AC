@@ -31,7 +31,7 @@ const ServiceCart = () => {
               <div key={i} className="card fade-in">
                 <img
                   className="card-img"
-                  src={`http://localhost:5000/uploads/${s.image}`}
+                  src={`https://ac-klmv.onrender.com/uploads/${s.image}`}
                   alt={s.name}
                   style={{ height: "180px" }}
                 />

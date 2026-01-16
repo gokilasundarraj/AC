@@ -58,7 +58,7 @@ const ProductCart = () => {
                     boxShadow: "var(--shadow-sm)"
                   }}>
                     <img
-                      src={`http://localhost:5000/uploads/${p.image}`}
+                      src={`https://ac-klmv.onrender.com/uploads/${p.image}`}
                       alt={p.name}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                       onError={(e) => { e.target.src = "https://via.placeholder.com/120x120?text=Product"; }}

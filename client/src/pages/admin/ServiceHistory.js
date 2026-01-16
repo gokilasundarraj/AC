@@ -14,7 +14,7 @@ const ServiceHistory = () => {
   const fetchServiceOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/services/admin-history");
+      const res = await axios.get("https://ac-klmv.onrender.com/api/services/admin-history");
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching service history:", err);

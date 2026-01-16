@@ -36,7 +36,7 @@ const ProductDetails = () => {
   );
 
   const imageUrl = product.image
-    ? `http://localhost:5000/uploads/${product.image}`
+    ? `https://ac-klmv.onrender.com/uploads/${product.image}`
     : "https://via.placeholder.com/600x400?text=AC+Unit";
 
   return (

@@ -16,8 +16,8 @@ const ServiceManagement = () => {
   const [imagePreview, setImagePreview] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API = "http://localhost:5000/api/services";
-  const IMAGE_BASE_URL = "http://localhost:5000/uploads";
+  const API = "https://ac-klmv.onrender.com/api/services";
+  const IMAGE_BASE_URL = "https://ac-klmv.onrender.com/uploads";
 
   const fetchServices = async () => {
     try {

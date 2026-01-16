@@ -86,7 +86,7 @@ const UserHome = () => {
               <div className="card fade-in" key={p._id} onClick={() => navigate(`/products/${p._id}`)} style={{ cursor: "pointer" }}>
                 <img
                   className="card-img"
-                  src={`http://localhost:5000/uploads/${p.image}`}
+                  src={`https://ac-klmv.onrender.com/uploads/${p.image}`}
                   alt={p.name}
                 />
                 <div className="card-content">
@@ -116,7 +116,7 @@ const UserHome = () => {
               <div className="card fade-in" key={s._id} onClick={() => navigate(`/services/${s._id}`)} style={{ cursor: "pointer" }}>
                 <img
                   className="card-img"
-                  src={`http://localhost:5000/uploads/${s.image}`}
+                  src={`https://ac-klmv.onrender.com/uploads/${s.image}`}
                   alt={s.name}
                   style={{ height: "180px" }}
                 />

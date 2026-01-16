@@ -37,7 +37,7 @@ const ServiceDetails = () => {
   );
 
   const imageUrl = service.image
-    ? `http://localhost:5000/uploads/${service.image}`
+    ? `https://ac-klmv.onrender.com/uploads/${service.image}`
     : "https://via.placeholder.com/600x400?text=Pro+Maintenance";
 
   return (

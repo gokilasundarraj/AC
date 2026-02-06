@@ -9,6 +9,26 @@ const ServiceDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [service, setService] = useState(null);
+  const [problem,setProblem] = useState("")
+  const [price,setPrice] = useState(0)
+
+  const handlechange = (e)=>{
+    const value = e.target.value
+    setProblem(value)
+
+    if(value.toLowerCase().includes("gas")){
+      setPrice(1500)
+    }
+    else if (value.toLowerCase().includes("water")) {
+      setPrice(800);
+    } 
+    else if (value.toLowerCase().includes("not cooling") || value.toLowerCase().includes("no cooling")) {
+      setPrice(1200);
+    } 
+    else {
+      setPrice("--  Pay After Service");
+    }
+  }
 
   useEffect(() => {
     const fetchService = async () => {
@@ -22,11 +42,26 @@ const ServiceDetails = () => {
     fetchService();
   }, [id]);
 
-  const addToCart = () => {
+  const addToCart = async () => {
+    if(problem.trim() !==""){
+       try {
+      await API.put(`/services/${service._id}/user-problem`, {
+        problem: problem,
+        price: price,
+      });
+
+    } catch (error) {
+      console.error(error);
+    }
+
     let cart = JSON.parse(localStorage.getItem("serviceCart")) || [];
     cart.push(service);
     localStorage.setItem("serviceCart", JSON.stringify(cart));
     navigate("/service-cart");
+    }
+    else{
+      alert("Please enter your AC problem")
+    }
   };
 
   if (!service) return (
@@ -106,7 +141,8 @@ const ServiceDetails = () => {
 
             <div style={{ marginBottom: "3rem" }}>
               <span style={{ fontSize: "1rem", color: "var(--text-light)", fontWeight: "600", display: "block", marginBottom: "0.5rem" }}>Professional Service Fee</span>
-              <h3 className="card-price" style={{ fontSize: "3.5rem", color: "var(--primary)" }}>₹ {service.price}</h3>
+              <input type="text" placeholder="Enter your AC Problem" className="ac-problem-input" value={problem} onChange={handlechange}/>
+              <h3 className="card-price" style={{ fontSize: "3.5rem", color: "var(--primary)" }}>₹{price}</h3>
               <p style={{ fontSize: "0.875rem", color: "var(--accent)", fontWeight: "700" }}>✓ Includes transport & basic diagnostics</p>
             </div>
 
@@ -121,7 +157,7 @@ const ServiceDetails = () => {
               <button
                 className="btn btn-outline"
                 style={{ flex: 1, padding: "1.25rem", fontSize: "1.1rem" }}
-                onClick={() => { addToCart(); navigate("/service-cart"); }}
+                onClick={() => {addToCart()}}
               >
                 Book Now
               </button>

@@ -18,6 +18,13 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userProblem:{
+      type: String,
+    },
+    userPrice:{
+      type: String,
+      default:0,
+    }
   },
   { timestamps: true }
 );

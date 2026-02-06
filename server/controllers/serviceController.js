@@ -1,7 +1,7 @@
 const Service = require("../models/Service");
 const fs = require("fs");
 const path = require("path");
-const ServiceOrder = require("../models/ServiceOrder"); // ✅ import once at top
+const ServiceOrder = require("../models/ServiceOrder");
 
 exports.createService = async (req, res) => {
   try {
@@ -139,6 +139,32 @@ exports.updateServiceStatus = async (req, res) => {
 
     await order.save();
     res.json({ success: true, message: `Service status updated to ${order.status}`, order });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.updateUserProblemPrice = async (req, res) => {
+   console.log("USER PROBLEM ROUTE HIT");
+  try {
+    const { problem, price } = req.body;
+
+    const service = await Service.findById(req.params.id);
+    if (!service) {
+      return res.status(404).json({ message: "Service not found" });
+    }
+
+    service.userProblem = problem;
+    service.userPrice = price;
+
+    await service.save();
+
+    res.status(200).json({
+      success: true,
+      message: "User problem & price updated",
+      service,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

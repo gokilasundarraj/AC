@@ -82,7 +82,7 @@ const ServiceOrder = () => {
         services: cart.map(item => ({
           service: item._id,
           name: item.name,
-          price: item.price,
+          price: item.userPrice,
         })),
         totalPrice: totalAmount,
         address: address,
@@ -102,7 +102,7 @@ const ServiceOrder = () => {
     }
   };
 
-  const totalAmount = cart.reduce((acc, s) => acc + s.price, 0);
+  const totalAmount = cart.reduce((acc, s) => acc + s.userPrice, 0);
 
   if (cart.length === 0) {
     navigate("/service-history");
@@ -130,7 +130,7 @@ const ServiceOrder = () => {
                         <p style={{ fontWeight: "700", marginBottom: "0.25rem" }}>{s.name}</p>
                         <p style={{ fontSize: "0.85rem", color: "var(--text-light)" }}>Professional Site Assessment</p>
                       </div>
-                      <span style={{ fontWeight: "600", color: "var(--primary)" }}>₹ {s.price}</span>
+                      <span style={{ fontWeight: "600", color: "var(--primary)" }}>₹ {s.userPrice}</span>
                     </div>
                   ))}
                 </div>

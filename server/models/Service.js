@@ -23,7 +23,6 @@ const serviceSchema = new mongoose.Schema(
     },
     userPrice:{
       type: String,
-      default:0,
     }
   },
   { timestamps: true }

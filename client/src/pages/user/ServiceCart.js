@@ -37,7 +37,7 @@ const ServiceCart = () => {
                 />
                 <div className="card-content">
                   <h3 className="card-title">{s.name}</h3>
-                  <p className="card-price" style={{ marginBottom: "1.5rem" }}>₹ {s.price}</p>
+                  <p className="card-price" style={{ marginBottom: "1.5rem" }}>₹ {s.userPrice}</p>
 
                   <div style={{ display: "flex", gap: "1rem" }}>
                     <button className="btn btn-primary" style={{ flex: 2 }} onClick={() => navigate("/service-order")}>Confirm Booking</button>

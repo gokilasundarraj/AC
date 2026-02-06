@@ -26,7 +26,7 @@ const ServiceDetails = () => {
       setPrice(1200);
     } 
     else {
-      setPrice("--  Pay After Service");
+      setPrice(0);
     }
   }
 
@@ -51,6 +51,7 @@ const ServiceDetails = () => {
       });
 
     } catch (error) {
+      
       console.error(error);
     }
 
@@ -142,7 +143,7 @@ const ServiceDetails = () => {
             <div style={{ marginBottom: "3rem" }}>
               <span style={{ fontSize: "1rem", color: "var(--text-light)", fontWeight: "600", display: "block", marginBottom: "0.5rem" }}>Professional Service Fee</span>
               <input type="text" placeholder="Enter your AC Problem" className="ac-problem-input" value={problem} onChange={handlechange}/>
-              <h3 className="card-price" style={{ fontSize: "3.5rem", color: "var(--primary)" }}>₹{price}</h3>
+              <h3 className="card-price" style={{ fontSize: "3.5rem", color: "var(--primary)" }}>₹{price === 0 ? "Pay After Service" : price}</h3>
               <p style={{ fontSize: "0.875rem", color: "var(--accent)", fontWeight: "700" }}>✓ Includes transport & basic diagnostics</p>
             </div>
 

@@ -150,7 +150,7 @@ const ServicePending = () => {
                         No service details available
                       </div>
                     )}
-                    {service.totalPrice && (
+                    
                       <div
                         style={{
                           borderTop: "2px solid var(--border)",
@@ -163,14 +163,15 @@ const ServicePending = () => {
                       >
                         <span>Total:</span>
                        <span style={{ color: "var(--primary)" }}>
-  {service.totalPrice && Number(service.totalPrice) !== 0
-    ? `₹ ${service.totalPrice}`
-    : "--"
-  }
-</span>
+                            {service.totalPrice || Number(service.totalPrice) === 0 || "0"
+                              ? `₹ ${service.totalPrice}`
+                              : "--"
+                            }
+                           
+                        </span>
 
                       </div>
-                    )}
+                    
                   </div>
 
                   <div className="otp-cluster">

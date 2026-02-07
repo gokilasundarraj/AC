@@ -969,7 +969,6 @@ tr:hover {
   line-height: 1.7;
 }
 
-/* ITEMS */
 .item-list {
   margin-top: 1.2rem;
   border-top: 1px solid #eee;
@@ -1009,7 +1008,6 @@ tr:hover {
 }
 
 
-/* Service History Page Specific Styles */
 .text-gradient {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   -webkit-background-clip: text;

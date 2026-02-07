@@ -36,7 +36,7 @@ const ServiceTechnicianWorkStatus = () => {
             className="card"
             onClick={() =>
               navigate("/service-completed", {
-                state: { technicianId }, // ✅ pass technicianId via route state
+                state: { technicianId }, 
               })
             }
             style={{ cursor: "pointer", textAlign: "center" }}

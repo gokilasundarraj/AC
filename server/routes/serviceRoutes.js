@@ -12,7 +12,8 @@ const {
   getAdminServiceHistory,
   bookService,
   updateServiceStatus,
-  updateUserProblemPrice
+  updateUserProblemPrice,
+  getGeoLocation
 } = require("../controllers/serviceController");
 
 router.get("/username/:name", async (req, res) => {
@@ -45,11 +46,12 @@ router.get("/completed", async (req, res) => {
 });
 
 router.post("/create", upload.single("image"), createService);
+router.post("/geocode", getGeoLocation);
 router.post("/book", bookService);
 router.get("/admin-history", getAdminServiceHistory);
 router.get("/", getAllServices);
 router.get("/:id", getServiceById);
-router.put("/:id/user-problem" , updateUserProblemPrice)
+router.put("/:id/user-problem", updateUserProblemPrice)
 router.put("/:id", upload.single("image"), updateService);
 router.delete("/:id", deleteService);
 router.put("/:id/status", updateServiceStatus);

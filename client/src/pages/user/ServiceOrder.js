@@ -28,10 +28,8 @@ const ServiceOrder = () => {
       async (position) => {
         const { latitude, longitude } = position.coords;
         try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
-          );
-          const data = await response.json();
+          const response = await API.post("/services/geocode", { latitude, longitude });
+          const data = response.data;
           if (data && data.display_name) {
             setAddress(data.display_name);
           } else {
@@ -55,7 +53,7 @@ const ServiceOrder = () => {
   };
 
   const confirmBooking = async () => {
-   
+
     const userDetails = userInfo?.user || userInfo;
     const userId = userDetails?.id || userDetails?._id;
 
@@ -73,7 +71,7 @@ const ServiceOrder = () => {
     setLoading(true);
 
     try {
-      
+
       const bookingData = {
         user: userId,
         customerName: userDetails.name,
@@ -138,7 +136,7 @@ const ServiceOrder = () => {
                 <div style={{ marginTop: "2rem", borderTop: "2px solid var(--bg-color)", paddingTop: "1.5rem" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <h3 style={{ margin: 0 }}>Total Service Fee</h3>
-                    <h2 style={{ margin: 0, color: "var(--primary)", fontSize: "2rem" }}>₹ {totalAmount === 0 ? "pay the after service" : totalAmount }</h2>
+                    <h2 style={{ margin: 0, color: "var(--primary)", fontSize: "2rem" }}>₹ {totalAmount === 0 ? "pay the after service" : totalAmount}</h2>
                   </div>
                   <p style={{ fontSize: "0.85rem", color: "var(--accent)", marginTop: "1rem", fontWeight: "600" }}>✓ Payable after technician visit</p>
                 </div>
@@ -163,7 +161,7 @@ const ServiceOrder = () => {
 
                 {error && (
                   <div className="alert alert-danger" style={{ marginBottom: "1.5rem", fontSize: "0.85rem" }}>
-                     {error}
+                    {error}
                   </div>
                 )}
 
@@ -200,7 +198,7 @@ const ServiceOrder = () => {
 
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 const Service = require("../models/Service");
 const fs = require("fs");
+const https = require("https");
 const path = require("path");
 const ServiceOrder = require("../models/ServiceOrder");
 
@@ -103,9 +104,9 @@ exports.bookService = async (req, res) => {
   try {
     const { user, customerName, customerPhone, customerEmail, services, totalPrice, address } = req.body;
 
-   if (!customerName || !services || services.length === 0 || address === undefined || address === null) {
-  return res.status(400).json({ message: "All required fields must be provided" });
-}
+    if (!customerName || !services || services.length === 0 || address === undefined || address === null) {
+      return res.status(400).json({ message: "All required fields must be provided" });
+    }
 
 
     const serviceOrder = await ServiceOrder.create({
@@ -147,7 +148,7 @@ exports.updateServiceStatus = async (req, res) => {
 
 
 exports.updateUserProblemPrice = async (req, res) => {
-   console.log("USER PROBLEM ROUTE HIT");
+  console.log("USER PROBLEM ROUTE HIT");
   try {
     const { problem, price } = req.body;
 
@@ -169,4 +170,42 @@ exports.updateUserProblemPrice = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+exports.getGeoLocation = (req, res) => {
+  const { latitude, longitude } = req.body;
+
+  if (!latitude || !longitude) {
+    return res.status(400).json({ message: "Coordinates required" });
+  }
+
+  const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+
+  const options = {
+    headers: {
+      'User-Agent': 'CoolingMastersApp/1.0 (contact@coolingmasters.com)'
+    }
+  };
+
+  https.get(url, options, (resp) => {
+    let data = '';
+
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    resp.on('end', () => {
+      try {
+        const jsonData = JSON.parse(data);
+        res.json(jsonData);
+      } catch (e) {
+        console.error("JSON Parse Error:", e);
+        res.status(500).json({ message: "Error parsing location data" });
+      }
+    });
+
+  }).on("error", (err) => {
+    console.error("Nominatim API Error:", err);
+    res.status(500).json({ message: "Failed to fetch address from external service" });
+  });
 };

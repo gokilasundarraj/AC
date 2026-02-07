@@ -42,23 +42,27 @@ const ServiceDetails = () => {
     fetchService();
   }, [id]);
 
-  const addToCart = async () => {
+  const addToCart = () => {
     if(problem.trim() !==""){
        try {
-      await API.put(`/services/${service._id}/user-problem`, {
-        problem: problem,
-        price: price,
-      });
+       const cartItem = {
+           _id: service._id,
+          name: service.name,
+          image: service.image,     
+          userProblem: problem,    
+          userPrice: price 
+       }
+
+      let cart = JSON.parse(localStorage.getItem("serviceCart")) || [];
+    cart.push(cartItem);
+    localStorage.setItem("serviceCart", JSON.stringify(cart));
+    navigate("/service-cart");
 
     } catch (error) {
       
       console.error(error);
     }
 
-    let cart = JSON.parse(localStorage.getItem("serviceCart")) || [];
-    cart.push(service);
-    localStorage.setItem("serviceCart", JSON.stringify(cart));
-    navigate("/service-cart");
     }
     else{
       alert("Please enter your AC problem")

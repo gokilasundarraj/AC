@@ -130,7 +130,7 @@ const ServiceOrder = () => {
                         <p style={{ fontWeight: "700", marginBottom: "0.25rem" }}>{s.name}</p>
                         <p style={{ fontSize: "0.85rem", color: "var(--text-light)" }}>Professional Site Assessment</p>
                       </div>
-                      <span style={{ fontWeight: "600", color: "var(--primary)" }}>₹ {s.userPrice}</span>
+                      <span style={{ fontWeight: "600", color: "var(--primary)" }}>₹ {s.userPrice === 0 ? "--" : s.userPrice}</span>
                     </div>
                   ))}
                 </div>
@@ -138,7 +138,7 @@ const ServiceOrder = () => {
                 <div style={{ marginTop: "2rem", borderTop: "2px solid var(--bg-color)", paddingTop: "1.5rem" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <h3 style={{ margin: 0 }}>Total Service Fee</h3>
-                    <h2 style={{ margin: 0, color: "var(--primary)", fontSize: "2rem" }}>₹ {totalAmount}</h2>
+                    <h2 style={{ margin: 0, color: "var(--primary)", fontSize: "2rem" }}>₹ {totalAmount === 0 ? "pay the after service" : totalAmount }</h2>
                   </div>
                   <p style={{ fontSize: "0.85rem", color: "var(--accent)", marginTop: "1rem", fontWeight: "600" }}>✓ Payable after technician visit</p>
                 </div>

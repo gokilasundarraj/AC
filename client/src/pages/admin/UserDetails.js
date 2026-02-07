@@ -101,7 +101,7 @@ const UserDetails = () => {
                   <div className="item" key={idx}>
                     <div className="item-info">
                       <h4>{srv.name}</h4>
-                      <p>Price: ₹ {srv.price === 0 ? "payment Done" : srvprice}</p>
+                      <p>Price: ₹ {srv.price === 0 ? "payment Done" : srv.price}</p>
                     </div>
                   </div>
                 ))}

@@ -1,14 +1,26 @@
 const Service = require("../models/Service");
-const fs = require("fs");
+const fs = require("fs").promises;
 const https = require("https");
 const path = require("path");
 const ServiceOrder = require("../models/ServiceOrder");
+
+// Helper to safely delete file
+const safeDeleteFile = async (filename) => {
+  if (!filename) return;
+  try {
+    const filePath = path.join(__dirname, "..", "uploads", filename);
+    await fs.unlink(filePath);
+  } catch (err) {
+    if (err.code !== 'ENOENT') console.error("Error deleting file:", err);
+  }
+};
 
 exports.createService = async (req, res) => {
   try {
     const { name, description, price } = req.body;
 
     if (!name || !price) {
+      if (req.file) await safeDeleteFile(req.file.filename);
       return res.status(400).json({ message: "Service name and price are required" });
     }
 
@@ -25,6 +37,7 @@ exports.createService = async (req, res) => {
 
     res.status(201).json({ success: true, message: "Service created successfully", service });
   } catch (error) {
+    if (req.file) await safeDeleteFile(req.file.filename);
     res.status(500).json({ message: error.message });
   }
 };
@@ -51,21 +64,24 @@ exports.getServiceById = async (req, res) => {
 exports.updateService = async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
-    if (!service) return res.status(404).json({ message: "Service not found" });
+    if (!service) {
+      if (req.file) await safeDeleteFile(req.file.filename);
+      return res.status(404).json({ message: "Service not found" });
+    }
 
     service.name = req.body.name || service.name;
     service.description = req.body.description || service.description;
     service.price = req.body.price || service.price;
 
     if (req.file) {
-      const oldImagePath = path.join(__dirname, "..", "uploads", service.image);
-      if (fs.existsSync(oldImagePath)) fs.unlinkSync(oldImagePath);
+      if (service.image) await safeDeleteFile(service.image);
       service.image = req.file.filename;
     }
 
     await service.save();
     res.json({ success: true, message: "Service updated successfully", service });
   } catch (error) {
+    if (req.file) await safeDeleteFile(req.file.filename);
     res.status(500).json({ message: error.message });
   }
 };
@@ -76,8 +92,7 @@ exports.deleteService = async (req, res) => {
     if (!service) return res.status(404).json({ message: "Service not found" });
 
     if (service.image) {
-      const imagePath = path.join(__dirname, "..", "uploads", service.image);
-      if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
+      await safeDeleteFile(service.image);
     }
 
     await service.deleteOne();
@@ -104,10 +119,13 @@ exports.bookService = async (req, res) => {
   try {
     const { user, customerName, customerPhone, customerEmail, services, totalPrice, address } = req.body;
 
-    if (!customerName || !services || services.length === 0 || address === undefined || address === null) {
+    // Use null checks to ensure 0 or empty string are properly handled if allowing specific values,
+    // but here we want to ensure they exist.
+    if (!customerName || !services || services.length === 0 || !address) {
       return res.status(400).json({ message: "All required fields must be provided" });
     }
 
+    // Validate that services are in correct format ? (Skipping deep validation to avoid breaking changes, but basic check is good)
 
     const serviceOrder = await ServiceOrder.create({
       user,
@@ -129,6 +147,8 @@ exports.bookService = async (req, res) => {
 exports.updateServiceStatus = async (req, res) => {
   try {
     const { status } = req.body;
+    if (!status) return res.status(400).json({ message: "Status is required" });
+
     const order = await ServiceOrder.findById(req.params.id);
 
     if (!order) return res.status(404).json({ message: "Service order not found" });
@@ -148,7 +168,7 @@ exports.updateServiceStatus = async (req, res) => {
 
 
 exports.updateUserProblemPrice = async (req, res) => {
-  console.log("USER PROBLEM ROUTE HIT");
+
   try {
     const { problem, price } = req.body;
 
@@ -187,7 +207,7 @@ exports.getGeoLocation = (req, res) => {
     }
   };
 
-  https.get(url, options, (resp) => {
+  const reqNominatim = https.get(url, options, (resp) => {
     let data = '';
 
     resp.on('data', (chunk) => {
@@ -199,13 +219,18 @@ exports.getGeoLocation = (req, res) => {
         const jsonData = JSON.parse(data);
         res.json(jsonData);
       } catch (e) {
+        // Silently fail to 500 but log error internally
         console.error("JSON Parse Error:", e);
         res.status(500).json({ message: "Error parsing location data" });
       }
     });
 
-  }).on("error", (err) => {
+  });
+
+  reqNominatim.on("error", (err) => {
     console.error("Nominatim API Error:", err);
     res.status(500).json({ message: "Failed to fetch address from external service" });
   });
+
+  reqNominatim.end();
 };

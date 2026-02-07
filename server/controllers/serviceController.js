@@ -103,9 +103,10 @@ exports.bookService = async (req, res) => {
   try {
     const { user, customerName, customerPhone, customerEmail, services, totalPrice, address } = req.body;
 
-    if (!customerName || !customerPhone || !services || !totalPrice || !address) {
-      return res.status(400).json({ message: "All fields are required to book a service" });
-    }
+   if (!customerName || !services || services.length === 0 || address === undefined || address === null) {
+  return res.status(400).json({ message: "All required fields must be provided" });
+}
+
 
     const serviceOrder = await ServiceOrder.create({
       user,

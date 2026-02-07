@@ -1008,7 +1008,27 @@ tr:hover {
   font-size: 0.95rem;
 }
 
-.ac-problem-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+
+/* Service History Page Specific Styles */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.otp-display {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border: 2px dashed var(--secondary);
+  border-radius: 8px;
+  color: var(--primary);
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  background-image: linear-gradient(to right, #f8fafc 50%, white 50%);
+  background-size: 20px 100%;
 }

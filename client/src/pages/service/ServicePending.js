@@ -134,7 +134,7 @@ const ServicePending = () => {
                           }}
                         >
                           <span>{item.name}</span>
-                          <span style={{ fontWeight: "700" }}>₹ {item.price}</span>
+                          <span style={{ fontWeight: "700" }}>₹ {item.userPrice}</span>
                         </div>
                       ))
                     ) : (

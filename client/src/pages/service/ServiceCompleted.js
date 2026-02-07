@@ -130,7 +130,7 @@ const ServiceCompleted = () => {
                                 fontWeight: "800",
                               }}
                             >
-                              ₹ {item.price || 0 ? "--" : order.totalPrice}
+                              ₹ {item.price === 0 ? "--" : item.price}
                             </span>
                           </div>
                         ))}
@@ -150,7 +150,7 @@ const ServiceCompleted = () => {
                               fontSize: "1.1rem",
                             }}
                           >
-                            ₹ {order.totalPrice || 0 ? "payment Done" : order.totalPrice }
+                            ₹ {order.totalPrice === 0 ? "payment Done" : order.totalPrice }
                           </strong>
                         </div>
                       </>

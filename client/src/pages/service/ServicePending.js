@@ -134,7 +134,15 @@ const ServicePending = () => {
                           }}
                         >
                           <span>{item.name}</span>
-                          <span style={{ fontWeight: "700" }}>₹ {item.userPrice}</span>
+
+                          <span style={{ fontWeight: "700" }}>
+  {Number(item.userPrice) > 0 && item.userPrice !== null && item.userPrice !== undefined
+    ? `₹ ${item.userPrice}`
+    : "Service completed. Please collect payment."
+  }
+</span>
+
+
                         </div>
                       ))
                     ) : (
@@ -154,9 +162,13 @@ const ServicePending = () => {
                         }}
                       >
                         <span>Total:</span>
-                        <span style={{ color: "var(--primary)" }}>
-                          ₹ {service.totalPrice}
-                        </span>
+                       <span style={{ color: "var(--primary)" }}>
+  {service.totalPrice && Number(service.totalPrice) !== 0
+    ? `₹ ${service.totalPrice}`
+    : "--"
+  }
+</span>
+
                       </div>
                     )}
                   </div>

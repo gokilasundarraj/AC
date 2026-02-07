@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../api/axios";
 import ServiceTechnicianNav from "../../components/navbar/ServiceTechnicianNav";
 import SerFooter from "../../components/footer/SerFooter";
 
@@ -12,7 +12,7 @@ const ServicePending = () => {
   useEffect(() => {
     const fetchPending = async () => {
       try {
-        const res = await axios.get("https://ac-klmv.onrender.com/api/services/admin-history");
+        const res = await API.get("/services/admin-history");
         const filtered = res.data.filter(
           (s) =>
             s.status?.toUpperCase() === "PENDING" ||
@@ -28,28 +28,28 @@ const ServicePending = () => {
   }, []);
 
   const handleVerify = async (serviceId) => {
-    const systemOtp = localStorage.getItem(`service_otp_${serviceId}`);
 
-    if (enteredOtp === systemOtp) {
-      try {
-       
-        await axios.put(`https://ac-klmv.onrender.com/services/${serviceId}/status`, {
-          status: "COMPLETED",
-        });
+    if (!enteredOtp) {
+      setError("Please enter the 4-digit token.");
+      return;
+    }
 
-        alert("Service Verification Successful! Marked as COMPLETED.");
+    try {
+      await API.put(`/services/${serviceId}/status`, {
+        status: "COMPLETED",
+        verificationOtp: enteredOtp
+      });
 
-        setPendingServices((prev) => prev.filter((s) => s._id !== serviceId));
+      alert("Service Verification Successful! Marked as COMPLETED.");
 
-        setError("");
-        setVerifyingId(null);
-        setEnteredOtp("");
-      } catch (err) {
-        console.error("Status update failed:", err);
-        setError("Failed to update service status. Try again.");
-      }
-    } else {
-      setError("Invalid Verification Code. Please check the code from customer.");
+      setPendingServices((prev) => prev.filter((s) => s._id !== serviceId));
+
+      setError("");
+      setVerifyingId(null);
+      setEnteredOtp("");
+    } catch (err) {
+      console.error("Status update failed:", err);
+      setError(err.response?.data?.message || "Invalid Verification Code. Please check.");
     }
   };
 

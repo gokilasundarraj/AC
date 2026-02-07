@@ -125,7 +125,7 @@ exports.bookService = async (req, res) => {
       return res.status(400).json({ message: "All required fields must be provided" });
     }
 
-    // Validate that services are in correct format ? (Skipping deep validation to avoid breaking changes, but basic check is good)
+    const otp = Math.floor(1000 + Math.random() * 9000).toString();
 
     const serviceOrder = await ServiceOrder.create({
       user,
@@ -136,6 +136,7 @@ exports.bookService = async (req, res) => {
       totalPrice,
       address,
       status: "PENDING",
+      otp, // Save generated OTP
     });
 
     res.status(201).json({ success: true, message: "Service booked successfully", order: serviceOrder });
@@ -146,18 +147,21 @@ exports.bookService = async (req, res) => {
 
 exports.updateServiceStatus = async (req, res) => {
   try {
-    const { status } = req.body;
+    const { status, verificationOtp } = req.body;
     if (!status) return res.status(400).json({ message: "Status is required" });
 
     const order = await ServiceOrder.findById(req.params.id);
 
     if (!order) return res.status(404).json({ message: "Service order not found" });
 
-    order.status = status.toUpperCase();
-
-    if (order.status === "COMPLETED") {
+    if (status.toUpperCase() === "COMPLETED") {
+      if (order.otp && order.otp !== verificationOtp) {
+        return res.status(400).json({ message: "Invalid OTP. Verification failed." });
+      }
       order.completedAt = new Date();
     }
+
+    order.status = status.toUpperCase();
 
     await order.save();
     res.json({ success: true, message: `Service status updated to ${order.status}`, order });
@@ -219,7 +223,7 @@ exports.getGeoLocation = (req, res) => {
         const jsonData = JSON.parse(data);
         res.json(jsonData);
       } catch (e) {
-        // Silently fail to 500 but log error internally
+
         console.error("JSON Parse Error:", e);
         res.status(500).json({ message: "Error parsing location data" });
       }

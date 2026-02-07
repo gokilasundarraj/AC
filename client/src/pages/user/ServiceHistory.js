@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import API from "../../api/axios";
 import UserNav from "../../components/navbar/UserNav";
 import Footer from "../../components/footer/UserFooter";
 
@@ -15,26 +15,14 @@ const ServiceHistory = () => {
     try {
       setLoading(true);
 
-      const res = await axios.get(
-        "https://ac-klmv.onrender.com/api/services/admin-history"
-      );
+      const res = await API.get("/services/admin-history");
 
       const userServices = res.data.filter(
         (s) => s.user?._id === userId || s.user === userId
       );
 
       userServices.forEach((service) => {
-        const status = service.status?.toUpperCase();
-
-        if (status === "PENDING" || status === "ASSIGNED" || status === "IN_PROGRESS") {
-          const otpKey = `service_otp_${service._id}`;
-          const existingOtp = localStorage.getItem(otpKey);
-
-          if (!existingOtp) {
-            const otp = Math.floor(1000 + Math.random() * 9000).toString();
-            localStorage.setItem(otpKey, otp);
-          }
-        }
+        // OTP is now handled by backend
       });
 
       setServices(userServices);
@@ -106,8 +94,7 @@ const ServiceHistory = () => {
                     </p>
 
                     <div className="otp-display">
-                      OTP:{" "}
-                      {localStorage.getItem(`service_otp_${service._id}`) || "----"}
+                      OTP: {service.otp || "Wait for assignment"}
                     </div>
                   </div>
                 </div>

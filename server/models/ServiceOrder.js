@@ -56,12 +56,15 @@ const serviceOrderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    otp: {
+      type: String,
+    },
     status: {
       type: String,
       enum: ["PENDING", "ASSIGNED", "IN_PROGRESS", "COMPLETED", "CANCELLED"],
       default: "PENDING",
     },
-    completedAt:{type:Date},
+    completedAt: { type: Date },
   },
   { timestamps: true }
 );
